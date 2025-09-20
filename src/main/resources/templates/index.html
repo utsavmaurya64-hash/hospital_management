@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Management - Home</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+
+    <style>
+        /* PAGE BACKGROUND COLOR */
+        body {
+            background-color: #e6f0ff; /* Light blue */
+            font-family: Arial, sans-serif;
+        }
+
+        .box-container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 30px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #f9f9f9; /* Light gray box */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        h1, h2, p {
+            margin: 10px 0;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <div class="box-container">
+        <form>
+            <h1 style="text-align: center;">Mukti Nath Maurya Hospital</h1>
+
+            <nav style="text-align: center;">
+                <a href="/">Home</a> |
+                <a href="/patients">Patients</a> |
+                <a href="/doctors">Doctors</a> |
+                <a href="/appointments">Appointments</a>
+            </nav>
+
+            <hr/>
+
+            <h2 style="text-align: center;">Quick stats</h2>
+            <p style="text-align: center;">Patients: <span th:text="${patients.size()}">0</span></p>
+            <p style="text-align: center;">Doctors: <span th:text="${doctors.size()}">0</span></p>
+            <p style="text-align: center;">Appointments: <span th:text="${appointments.size()}">0</span></p>
+        </form>
+    </div>
+</section>
+</body>
+</html>

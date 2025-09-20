@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointments</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+
+    <style>
+        .appointments-box {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #e6f2ff;
+            border: 2px solid #3399ff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+
+        th {
+            background-color: #3399ff;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f9ff;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #003366;
+        }
+
+        form {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        select, input {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #3399ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #267acc;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Appointments</h1>
+<a href="/">Home</a>
+
+<div class="appointments-box">
+    <h2>Book Appointment</h2>
+    <form action="/appointments" method="post">
+        Patient:
+        <select name="patientId" required>
+            <option th:each="p : ${patients}" th:value="${p.id}" th:text="${p.name}">Name</option>
+        </select>
+        Doctor:
+        <select name="doctorId" required>
+            <option th:each="d : ${doctors}" th:value="${d.id}" th:text="${d.name}">Doctor</option>
+        </select>
+        DateTime (ISO): <input name="datetime" value="2025-09-21T10:00:00" required/><br/>
+        <button type="submit">Book</button>
+    </form>
+
+    <h2>All Appointments</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="a : ${appointments}">
+            <td th:text="${a.id}">1</td>
+            <td th:text="${a.patient.name}">p</td>
+            <td th:text="${a.doctor.name}">d</td>
+            <td th:text="${a.appointmentTime}">time</td>
+            <td th:text="${a.status}">status</td>
+            <td>
+                <form th:action="@{'/appointments/' + ${a.id} + '/cancel'}" method="post">
+                    <button type="submit">Cancel</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
